@@ -9,7 +9,7 @@ switch($uri) {
         error_log($data);
         break;
     default:
-        $ivr = new \NexmoDemo\Menu($config);
+        $ivr = new \VonageDemo\Menu($config);
         $method = strtolower($uri) . 'Action';
 
         $ivr->$method(json_decode($data, true));

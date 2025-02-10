@@ -1,6 +1,6 @@
-# Basic Phone Menu using PHP and the Nexmo Voice API
+# Basic Phone Menu using PHP and the Vonage Voice API
 
-This app uses the Nexmo Voice API to demonstrate an interactive order status phone menu.
+This app uses the Vonage Voice API to demonstrate an interactive order status phone menu.
 
 * Callers can search for orders by order ID.
 * If the caller's number is found, they can get the status of their latest order.
@@ -9,49 +9,51 @@ This app uses the Nexmo Voice API to demonstrate an interactive order status pho
 
 You will need:
 
-* At least one Nexmo Virtual Number (Phone Number)
+* At least one Vonage Virtual Number (Phone Number)
 * [composer](http://getcomposer.org/) installed
-* The [Nexmo CLI][cli] installed
-* A public web server to host this web app, or [ngrok][ngrok] on your local development system.
+* The [Vonage CLI](https://github.com/Vonage/vonage-cli) installed
+* A public web server to host this web app, or [ngrok](https://ngrok.com) on
+  your local development system.
 
 ## Installation
 
 ```sh
-git clone https://github.com/nexmo/php-phone-menu.git
+git clone https://github.com/Vonage-Community/sample-voice-php-phone-menu.git
 cd php-phone-menu
 composer install
 ```
 
 ## Configuration
 
-Copy `config.php.dist` to `config.php`, and add public URL Nexmo can use to access the application. If you're using 
-[ngrok][ngrok] you'll need to know what subdomain will be used to expose your application.  
+Copy `config.php.dist` to `config.php`, and add public URL Vonage can use to
+access the application. If you're using [ngrok](https://ngrok.com) you'll need
+to know what subdomain will be used to expose your application.
 
-## Setup (Using Nexmo CLI)
+## Setup
 
-Create the nexmo application, using the [Nexmo CLI][cli] and take note of the application universally unique identifier (UUID):
+### Buy Numbers & Create Application
 
+To run this application we need to buy 2 numbers, set up an application, and tie the numbers to this application.
+
+1. create an application
 ```sh
-nexmo app:create demo-app --keyfile private.key http://example.com http://example.com
+voange apps create "Whisper System"
 ```
 
-Buy numbers for calls that you would like to track. The following example buys the first available number in a given country by country code.
-
+2. Add voice capabilities to the application
 ```sh
-nexmo number:buy --country_code [YOUR_COUNTRY_CODE]
+vonage apps capabilities update voice 00000000-0000-0000-0000-000000000000 --voice-inbound-url http://your.domain/answer_inbound --voice-event-url http://your.domain/event
 ```
 
-Link the virtual numbers to the app id with the Nexmo CLI:
-
+3. Buy 2 numbers (run this command for each number):
 ```sh
-nexmo link:app [NUMBER] [app-id]
+vonage numbers buy US 16127779311
 ```
 
-Update the app to set the webhook urls to be your server (or [ngrok][ngrok] subdomain) instead of the example.com 
-placeholders used at creation.
+4. Link the numbers to the application ID (once for each number):
 
 ```sh
-nexmo app:update ['app-id'] demo-app [your url]/answer [your url]/event
+vonage apps numbers link 00000000-0000-0000-0000-000000000000 16127779311
 ```
 
 ### Running the App
@@ -75,6 +77,7 @@ Or you can configure a webserver to serve the app using `/public` as the webroot
 Call the virtual number to check order status over the phone. You can enter any
 order ID as the system chooses a random status.
 
-[php-lib]: https://github.com/Nexmo/nexmo-php
-[ngrok]: https://ngrok.com/
-[cli]: https://github.com/Nexmo/nexmo-cli/
+## More Information
+
+For a more detailed writeup, see the
+[tutorial on the Vonage Developer Portal](https://developer.vonage.com/en/voice/voice-api/guides/interactive-voice-response).

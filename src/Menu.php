@@ -1,5 +1,5 @@
 <?php
-namespace NexmoDemo;
+namespace VonageDemo;
 
 /**
  * Phone Menu Logic

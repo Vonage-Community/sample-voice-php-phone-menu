@@ -1,18 +1,26 @@
 {
-  "name": "nexmo/ivr_tutorial",
+  "$schema": "https://getcomposer.org/schema.json",
+  "name": "vonage/sample-voice-php-phone-menu",
   "description": "Simple IVR Tutorial",
   "minimum-stability": "stable",
-  "license": "mit",
+  "license": "Apache-2.0",
   "authors": [
     {
       "name": "Tim Lytle",
-      "email": "tim@timlytle.net"
+      "homepage": "https://github.com/tjlytle"
+    },
+    {
+      "name": "Michael Heap",
+      "homepage": "https://github.com/mheap"
+    },
+    {
+      "name": "Chuck \"MANCHUCK\" Reeves",
+      "homepage": "https://github.com/manchuck"
     }
   ],
-  "require": {
-    "nexmo/client": "dev-account-api as 1.0.0"
-  },
   "autoload": {
-    "psr-4": {"NexmoDemo\\": "src/"}
+    "psr-4": {
+      "VonageDemo\\": "src/"
+    }
   }
 }
